@@ -1,5 +1,5 @@
 {
-  "name": "soci-start",
+  "name": "simon",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "license": "MIT",
   "dependencies": {
+    "@clerk/nextjs": "^5.2.4",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-f994737d14-20240522",
