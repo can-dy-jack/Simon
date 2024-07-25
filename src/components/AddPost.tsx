@@ -1,6 +1,29 @@
+import { addPost } from "@/lib/actions";
+// import { auth } from "@clerk/nextjs/server";
+// import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
 const AddPost = () => {
+  // const { user } = useUser();
+  // const userId = user?.id;
+
+  const testAction = async (form: FormData) => {
+    
+
+    // if (!userId) return;
+    const desc = form.get("desc") as string;
+    try {
+      const res = await addPost(form,"")
+      
+      // console.log(prisma, globalThis);
+      // const allUsers = await prisma.user.findMany()
+      console.log(res);
+      
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div className="p-4 bg-white shadow-md rounded-lg flex gap-4 justify-between text-sm">
       <Image
@@ -11,10 +34,10 @@ const AddPost = () => {
         className="w-12 h-12 object-cover rounded-full"
       />
       <div className="flex-1">
-        <div className="flex gap-4 relative">
+        <form action={testAction} className="flex gap-4 relative">
           <textarea
-            name="addpost"
-            id="addpost"
+            name="desc"
+            id="desc"
             autoFocus
             placeholder="输出你的想法？"
             className="resize-y bg-slate-100 rounded-lg flex-1 p-2 outline-none focus:outline-1 focus:outline-blue-400 transition-all"
@@ -38,7 +61,8 @@ const AddPost = () => {
             height={20}
             className="w-5 h-5 cursor-pointer self-end"
           />
-        </div>
+          <button >提交</button>
+        </form>
         <div className="flex items-center gap-4 mt-4 text-gray-400 flex-wrap">
           {[
             { text: "图片", src: "/media-image.svg" },

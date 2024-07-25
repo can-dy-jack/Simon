@@ -2,6 +2,7 @@ import ProfileCard from "./ProfileCard";
 import Image from "next/image";
 import Link from "next/link";
 import Ad from "./Infor/Ad";
+import { Fragment } from 'react';
 
 const Page = ({ type = "home" }: { type?: "home" | "profile" }) => {
   return (
@@ -21,13 +22,13 @@ const Page = ({ type = "home" }: { type?: "home" | "profile" }) => {
             {src: "/lists.png"},
             {src: "/settings.png"},
           ].map((item, idx) => (
-            <>
-              <Link key={idx} href="/" className="flex items-center gap-4 p-2 rounded-lg hover:bg-slate-100">
+            <Fragment key={idx}>
+              <Link href="/" className="flex items-center gap-4 p-2 rounded-lg hover:bg-slate-100">
                 <Image src={item.src} alt="" width={20} height={20} />
                 <span>xxx xxx</span>
               </Link>
               {/* <hr className="border-t-1 border-gray-50 w-36 self-center" /> */}
-            </>
+            </Fragment>
           ))
         }
       </div>
