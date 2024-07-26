@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 
 const Page = ({ type = "home" }: { type?: "home" | "profile" }) => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 h-full">
       {type == "home" ? <ProfileCard  /> : null}
       <div className="p-4 bg-white rounded-lg shadow-md text-sm text-gary-500 flex flex-col gap-2">
         {

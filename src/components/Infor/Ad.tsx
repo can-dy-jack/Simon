@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Ad = ({ size = "md" }: { size: "sm" | "md" | "lg" }) => {
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md text-sm">
+    <div className="p-4 bg-white rounded-lg shadow-md text-sm sticky top-4 left-0">
       <div className="flex items-center justify-between text-gray-500 font-medium">
         <span>广告</span>
         <Image src="/more.png" alt="" width={16} height={16} />

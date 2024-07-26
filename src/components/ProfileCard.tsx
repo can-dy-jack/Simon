@@ -1,18 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getUserInfo } from "@/lib/actions";
+import { useEffect, useMemo, useState } from "react";
+import type { UserInfo } from "../lib/types";
 
 const ProfileCard = () => {
+  const [userInfo, setUserInfo] = useState({} as UserInfo);
+
+  useEffect(() => {
+    getUserInfo().then((res) => {
+      setUserInfo(res as UserInfo);
+    });
+  }, []);
+
+  const username = useMemo(() => {
+    if (userInfo.name && userInfo.surname) {
+      return userInfo.name + " " + userInfo.surname;
+    } else {
+      return userInfo.username;
+    }
+  }, [userInfo]);
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-6">
       <div className="h-20 relative">
         <Image
-          src="https://images.unsplash.com/photo-1721587352217-ecc89e9a0d81?q=80&w=2673&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={userInfo.cover || "/noCover.png"}
           alt=""
           fill
           className="rounded-md"
         />
         <Image
-          src="/avatar.jpg"
+          src={userInfo.avatar || "/avatar.jpg"}
           alt=""
           width={48}
           height={48}
@@ -20,7 +39,7 @@ const ProfileCard = () => {
         />
       </div>
       <div className="flex flex-col gap-2 items-center">
-        <span className="font-semibold">User name</span>
+        <span className="font-semibold">{username}</span>
         <div className="flex items-center gap-4">
           <div className="flex">
             <Image
@@ -45,7 +64,9 @@ const ProfileCard = () => {
               className="rounded-full w-3 h-3 object-cover"
             />
           </div>
-          <span className="text-xs text-gray-500">999 粉丝</span>
+          <span className="text-xs text-gray-500">
+            {userInfo._count ? userInfo._count.follower : 9999} 粉丝
+          </span>
         </div>
         <button className="bg-blue-500 text-white p-2 rounded-md text-xs">
           <Link href="/profile/kartjim">我的主页</Link>

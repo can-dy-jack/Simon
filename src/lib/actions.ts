@@ -343,3 +343,29 @@ export const deletePost = async (postId: number) => {
     console.log(err);
   }
 };
+
+
+export const getUserInfo = async () => {
+  const { userId } = auth();
+
+  if (!userId) throw new Error("User is not authenticated!");
+
+  try {
+    const userInfo = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      include: {
+        _count: {
+          select: {
+            follower: true
+          }
+        }
+      }
+    });
+
+    return userInfo;
+  } catch (err) {
+    console.log(err);
+  }
+};
