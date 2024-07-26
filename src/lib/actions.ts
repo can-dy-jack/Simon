@@ -369,3 +369,46 @@ export const getUserInfo = async () => {
     console.log(err);
   }
 };
+
+export const getUserInfoByUsername = async (username: string) => {
+  try {
+    const userInfo = await prisma.user.findFirst({
+      where: {
+        username,
+      },
+      include: {
+        _count: {
+          select: {
+            follower: true,
+            following: true,
+            posts: true
+          }
+        }
+      }
+    });
+
+    return userInfo;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getUserId = async () => {
+  const { userId } = auth();
+  if (!userId) throw new Error("User is not authenticated!");
+  return userId;
+};
+
+export const findBlocked = async (userId: string) => {
+  const { userId: currentUserId } = auth();
+  if (!currentUserId) throw new Error("User is not authenticated!");
+
+  const res = await prisma.block.findFirst({
+    where: {
+      blockerId: userId,
+      blockedId: currentUserId
+    }
+  })
+
+  return res;
+};

@@ -13,5 +13,7 @@ export type UserInfo = {
   createAt: Date;
   _count: {
     follower: number;
+    following: number;
+    posts: number;
   };
 };

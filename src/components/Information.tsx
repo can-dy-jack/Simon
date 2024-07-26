@@ -3,15 +3,16 @@ import Ad from "./Infor/Ad";
 import Birthdays from "./Infor/Birthdays";
 import UserInfo from "./Infor/UserInfo";
 import UserMedia from "./Infor/UserMedia";
+import { User } from "@prisma/client";
 
-const Information = ({ userId }: {userId?:string}) => {
+const Information = ({ userInfo, username }: {userInfo?: User, username: string}) => {
   return (
     <div className="flex flex-col gap-6 h-full">
       {
-        userId && (
+        userInfo && (
           <>
-            <UserInfo userId={userId} />
-            <UserMedia userId={userId} />
+            <UserInfo userInfo={userInfo} username={username} />
+            <UserMedia userInfo={userInfo} />
           </>
         )
       }

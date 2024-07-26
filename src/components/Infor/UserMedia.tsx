@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { User } from "@prisma/client";
 
-const UserMedia = ({ userId }: { userId?: string }) => {
+const UserMedia = ({ userInfo }: { userInfo?: User }) => {
   return (
     <div className="p-4 bg-white rounded-lg shadow-md text-sm">
       <div className="flex items-center justify-between font-medium mb-4">

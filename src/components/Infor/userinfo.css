@@ -1,0 +1,34 @@
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card .more {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+.card:hover .more {
+  opacity: 1;
+}
+.card::before {
+  content: '个人信息';
+  position: absolute;
+  width: 100%;
+  height: 26px;
+  line-height: 26px;
+  background-color: rgb(78, 128, 238);
+  /* background-image: linear-gradient(45deg, #b3ff9e 30%, #7bc9fd  51%, #ffb2a2  70%); */
+  transform: rotate(45deg) translate(33%, -80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+.desc {
+  font-family: Arial, Helvetica, '黑体', '楷体', '宋体' sans-serif;
+  /* font-size: 1.2em; */
+  line-height: 1.5;
+  /* z-index: 6; */
+}
