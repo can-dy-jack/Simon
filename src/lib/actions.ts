@@ -441,3 +441,35 @@ export const findFollowingReq = async (userId: string) => {
   return res;
 };
 
+export const getMedia = async (userId: string) => {
+  const res = await prisma.post.findMany({
+    where: {
+      userId,
+      img: {
+        not: null,
+      }
+    },
+    take: 8,
+    orderBy: {
+      createAt: "desc"
+    }
+  })
+
+  return res;
+};
+
+export const getFollowReqs = async () => {
+  const { userId } = auth();
+  if (!userId) throw new Error("User is not authenticated!");
+
+  const res = await prisma.followRequest.findMany({
+    where: {
+      receiverId: userId
+    },
+    include: {
+      sender: true,
+    }
+  })
+
+  return res;
+};

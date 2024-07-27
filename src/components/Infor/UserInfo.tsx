@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { User } from "@prisma/client";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./userinfo.css";
 import UserInforInteraction from "./UserInforInteraction";
+import { getUserId } from "@/lib/actions";
+import UpdateUser from "./UpdateUser";
 
 const UserInfo = ({
   userInfo,
@@ -12,6 +14,8 @@ const UserInfo = ({
   userInfo?: User;
   username?: string;
 }) => {
+  let [currentUserId, setCurrentUserId] = useState<null | string>(null);
+
   const formateDate = useCallback((date: Date | string | undefined) => {
     if (date) {
       return new Date(date).toLocaleString("zh-cn", {
@@ -21,6 +25,12 @@ const UserInfo = ({
       });
     }
     return "";
+  }, []);
+
+  useEffect(() => {
+    getUserId().then((res) => {
+      setCurrentUserId(res);
+    });
   }, []);
 
   return (
@@ -35,9 +45,13 @@ const UserInfo = ({
         <div className="flex items-center gap-2 p-4 pb-0">
           <span className="text-xl text-black">{username}</span>
           <span className="text-sm text-gray-400">@{username}</span>
-          <Link href="/" className="text-blue-500 text-xs more">
-            查看更多
-          </Link>
+          {currentUserId && userInfo && userInfo.id == currentUserId ? (
+            <UpdateUser />
+          ) : (
+            <Link href="/" className="text-blue-500 text-xs more">
+              查看更多
+            </Link>
+          )}
         </div>
         {userInfo?.description && (
           <div
@@ -95,7 +109,9 @@ const UserInfo = ({
           </div>
         )}
       </div>
-      <UserInforInteraction userInfo={userInfo} />
+      {currentUserId && userInfo && userInfo.id !== currentUserId && (
+        <UserInforInteraction userInfo={userInfo} />
+      )}
     </div>
   );
 };

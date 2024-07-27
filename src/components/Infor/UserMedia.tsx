@@ -1,8 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
-import { User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
+import { useEffect, useState } from "react";
+import { getMedia } from "@/lib/actions";
+import Load from "../partial/Load";
 
 const UserMedia = ({ userInfo }: { userInfo?: User }) => {
+  const [postsWithMedia, setMedia] = useState([] as Post[]);
+  const [loading, setLoad] = useState(false);
+
+  useEffect(() => {
+    if (userInfo && userInfo.id) {
+      setTimeout(() => {
+        setLoad(true);
+      }, 0)
+      getMedia(userInfo.id).then(res => {
+        setMedia(res);
+      }).finally(() => {
+        setLoad(false);
+      })
+    }
+  }, [userInfo]);
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md text-sm">
       <div className="flex items-center justify-between font-medium mb-4">
@@ -12,16 +31,16 @@ const UserMedia = ({ userInfo }: { userInfo?: User }) => {
         </Link>
       </div>
       <div className="flex gap-2 justify-between flex-wrap">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-          <div className="relative w-1/5 h-24" key={item}>
+        {loading ? <Load /> : postsWithMedia.length ? postsWithMedia.map((item) => (
+          <div className="relative w-1/5 h-24" key={item.id}>
             <Image
-              src="/avatar.jpg"
+              src={item.img || "/avatar.jpg"}
               fill
               alt=""
               className="object-cover rounded-md"
             />
           </div>
-        ))}
+        )) : "暂无图片"}
       </div>
     </div>
   );

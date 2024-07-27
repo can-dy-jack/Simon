@@ -4,6 +4,8 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import prisma from "@/lib/client";
 
 // ngrok http http://localhost:3000 
+// clerk 配置
+// .env WEBHOOK_SECRET
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint

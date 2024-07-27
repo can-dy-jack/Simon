@@ -5,10 +5,10 @@ import { useEffect, useOptimistic, useState } from "react";
 import {
   findBlocked,
   findFollowing,
-  findFollowingReq,
-  getUserId,
+  findFollowingReq
 } from "@/lib/actions";
 import { User } from "@prisma/client";
+import Load from "../partial/Load";
 
 const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
   const [state, setState] = useState({
@@ -16,6 +16,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
     isFollowing: false,
     isFollowingSent: false,
   });
+  const [loading, setLoad] = useState(3);
 
   useEffect(() => {
     if (userInfo && userInfo.id) {
@@ -25,6 +26,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isUserBlocked: res != null,
         }));
+        setLoad(pre => pre - 1);
       });
       findFollowing(userInfo?.id).then((res) => {
         // setIsFollowing(res != null);
@@ -32,6 +34,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isFollowing: res != null,
         }));
+        setLoad(pre => pre - 1);
       });
       findFollowingReq(userInfo?.id).then((res) => {
         // setIsFollowingSent(res != null);
@@ -39,6 +42,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isFollowingSent: res != null,
         }));
+        setLoad(pre => pre - 1);
       });
     }
   }, [userInfo]);
@@ -84,6 +88,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
   };
 
   return (
+    loading > 0 ? <Load /> :
     <div className="flex p-4 bg-blue-50 items-center gap-4">
       <form action={follow} className="flex-1">
         {optimisticState.isFollowing ? (
