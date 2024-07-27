@@ -344,7 +344,7 @@ export const deletePost = async (postId: number) => {
   }
 };
 
-
+// self
 export const getUserInfo = async () => {
   const { userId } = auth();
 
@@ -412,3 +412,32 @@ export const findBlocked = async (userId: string) => {
 
   return res;
 };
+
+export const findFollowing = async (userId: string) => {
+  const { userId: currentUserId } = auth();
+  if (!currentUserId) throw new Error("User is not authenticated!");
+
+  const res = await prisma.follower.findFirst({
+    where: {
+      followerId: userId,
+      followingId: currentUserId
+    }
+  })
+
+  return res;
+};
+
+export const findFollowingReq = async (userId: string) => {
+  const { userId: currentUserId } = auth();
+  if (!currentUserId) throw new Error("User is not authenticated!");
+
+  const res = await prisma.followRequest.findFirst({
+    where: {
+      senderId: userId,
+      receiverId: currentUserId
+    }
+  })
+
+  return res;
+};
+

@@ -50,7 +50,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
     </div>
   );
   if (!userInfo) return notFound();
-  if (isBlocked) return notFound();
+  // if (isBlocked) return notFound();
 
   return (
     <div className="flex gap-6 pt-6">

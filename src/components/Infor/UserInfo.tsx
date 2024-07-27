@@ -3,6 +3,7 @@ import Image from "next/image";
 import { User } from "@prisma/client";
 import { useCallback } from "react";
 import "./userinfo.css";
+import UserInforInteraction from "./UserInforInteraction";
 
 const UserInfo = ({
   userInfo,
@@ -94,14 +95,7 @@ const UserInfo = ({
           </div>
         )}
       </div>
-      <div className="flex p-4 bg-blue-50 items-center gap-4">
-        <button className="bg-blue-500 text-white text-sm rounded-md p-2 flex-1">
-          关注
-        </button>
-        <span className="text-red-400 text-right text-xs cursor-pointer w-20">
-          block user
-        </span>
-      </div>
+      <UserInforInteraction userInfo={userInfo} />
     </div>
   );
 };

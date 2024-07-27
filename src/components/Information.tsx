@@ -4,6 +4,8 @@ import Birthdays from "./Infor/Birthdays";
 import UserInfo from "./Infor/UserInfo";
 import UserMedia from "./Infor/UserMedia";
 import { User } from "@prisma/client";
+import { Suspense } from "react";
+
 
 const Information = ({ userInfo, username }: {userInfo?: User, username: string}) => {
   return (
@@ -11,8 +13,12 @@ const Information = ({ userInfo, username }: {userInfo?: User, username: string}
       {
         userInfo && (
           <>
-            <UserInfo userInfo={userInfo} username={username} />
-            <UserMedia userInfo={userInfo} />
+            <Suspense fallback="loading...">
+              <UserInfo userInfo={userInfo} username={username} />
+            </Suspense>
+            <Suspense fallback="loading...">
+              <UserMedia userInfo={userInfo} />
+            </Suspense>
           </>
         )
       }
