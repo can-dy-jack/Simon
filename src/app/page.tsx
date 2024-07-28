@@ -30,7 +30,7 @@ const Homepage = () => {
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">
-        <Information />
+        <Information username="" />
       </div>
     </div>
   )
