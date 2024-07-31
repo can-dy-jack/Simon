@@ -36,6 +36,6 @@ export async function POST(request) {
     return Response.json(userInfo)
   } catch (err) {
     console.log(err);
-    return {error: err}
+    return Response.json({ error: err });
   }
 }
