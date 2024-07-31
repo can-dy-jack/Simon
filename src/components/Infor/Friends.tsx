@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { acceptFollowRequest, declineFollowRequest, getFollowReqs } from "@/lib/actions";
+import { acceptFollowRequest, declineFollowRequest } from "@/lib/actions";
+import { getFollowReqs } from "@/actions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FollowRequest, User } from "@prisma/client";
 import { userInfo } from "os";

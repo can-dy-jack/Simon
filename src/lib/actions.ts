@@ -356,20 +356,6 @@ export const getUserId = async () => {
   return userId;
 };
 
-export const findBlocked = async (userId: string) => {
-  const { userId: currentUserId } = auth();
-  if (!currentUserId) throw new Error("User is not authenticated!");
-
-  const res = await prisma.block.findFirst({
-    where: {
-      blockerId: userId,
-      blockedId: currentUserId
-    }
-  })
-
-  return res;
-};
-
 export const findFollowing = async (userId: string) => {
   const { userId: currentUserId } = auth();
   if (!currentUserId) throw new Error("User is not authenticated!");
@@ -409,22 +395,6 @@ export const getMedia = async (userId: string) => {
     take: 8,
     orderBy: {
       createAt: "desc"
-    }
-  })
-
-  return res;
-};
-
-export const getFollowReqs = async () => {
-  const { userId } = auth();
-  if (!userId) throw new Error("User is not authenticated!");
-
-  const res = await prisma.followRequest.findMany({
-    where: {
-      receiverId: userId
-    },
-    include: {
-      sender: true,
     }
   })
 

@@ -7,7 +7,6 @@ export function getUserInfo() {
   return fetch(baseURL + "getUserInfo", {
     method: "POST",
     headers: myHeaders,
-    redirect: "follow"
   })
     .then((response) => response.json());
 }
@@ -22,7 +21,45 @@ export function getUserInfoByUsername(username: string) {
     body: JSON.stringify({
       username
     }),
-    redirect: "follow"
   })
     .then((response) => response.json());
 }
+
+export function findBlocked(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "findBlocked", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({
+      userId
+    }),
+  })
+    .then((response) => response.json());
+}
+
+export function getFollowReqs() {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "getFollowReqs", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({})
+  })
+    .then((response) => response.json());
+}
+
+export function switchFollow(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "switchFollow", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ userId })
+  })
+    .then((response) => response.json());
+}
+

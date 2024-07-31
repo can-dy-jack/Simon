@@ -1,12 +1,14 @@
 "use client";
 
-import { switchFollow, switchBlock } from "@/lib/actions";
+import { switchBlock } from "@/lib/actions";
 import { useEffect, useOptimistic, useState } from "react";
 import {
-  findBlocked,
   findFollowing,
-  findFollowingReq
+  findFollowingReq,
+  switchFollow
 } from "@/lib/actions";
+import { findBlocked } from "@/actions";
+
 import { User } from "@prisma/client";
 import Load from "../partial/Load";
 

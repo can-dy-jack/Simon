@@ -17,12 +17,7 @@ export async function POST(request: NextRequest) {
   if (!userId) {
     return Response.json({ error: "no userId!" });
   }
-
-  const username = body.username;
-  if (!username) {
-    return Response.json({ error: "no username!" });
-  }
-
+  
   try {
     const res = await prisma.block.findFirst({
       where: {
