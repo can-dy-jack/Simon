@@ -4,10 +4,14 @@ import Sidebar from "../../../components/Sidebar";
 import Information from "../../../components/Information";
 import Feed from "../../../components/Feed";
 import Image from "next/image";
-import { getUserInfoByUsername, findBlocked } from "@/lib/actions";
+import { findBlocked } from "@/lib/actions";
+import { getUserInfoByUsername } from "@/actions";
 import { useEffect, useMemo, useState } from "react";
 import type { UserInfo } from "@/lib/types";
 import { notFound } from "next/navigation";
+
+
+import { TasksProvider } from '@/context/config';
 
 const ProfilePage = ({ params }: { params: { username: string } }) => {
   const [isLoading, setLoad] = useState(true);
@@ -53,6 +57,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
   // if (isBlocked) return notFound();
 
   return (
+    <TasksProvider>
     <div className="flex gap-6 pt-6">
       <div className="hidden xl:block w-[20%]">
         <Sidebar type="profile" />
@@ -103,7 +108,8 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
       <div className="hidden lg:block w-[30%]">
         <Information userInfo={userInfo} username={username} />
       </div>
-    </div>
+      </div>
+      </TasksProvider>
   );
 };
 

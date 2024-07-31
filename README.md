@@ -6,12 +6,6 @@
 
 <!-- --registry=https://registry.npmmirror.com -->
 
-代办：
-- [ ] redux
-  - 全局保存 当前用户的id，在各个组件里使用
-  - 全局刷新 - 发布订阅
-- [ ] 
-
 ### 环境变量
 ```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -24,3 +18,13 @@ DATABASE_URL=
 
 WEBHOOK_SECRET=
 ```
+
+### 进度
+- middleware.ts文件位置导致的报错？
+- usecontext - 全局刷新
+- 好友申请 - 同意/拒绝
+- 用户信息更新 - cover图片功能
+- actions改为api
+
+### 计划
+- clerk 生产环境

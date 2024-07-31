@@ -1,6 +1,6 @@
 {
   "name": "simon",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -14,11 +14,13 @@
   "dependencies": {
     "@clerk/nextjs": "^5.2.4",
     "@prisma/client": "^5.17.0",
+    "@reduxjs/toolkit": "^2.2.7",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "next": "15.0.0-rc.0",
     "prisma": "^5.17.0",
     "react": "19.0.0-rc-f994737d14-20240522",
     "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "react-redux": "^9.1.2",
     "svix": "^1.25.0",
     "zod": "^3.23.8"
   },

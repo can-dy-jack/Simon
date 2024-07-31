@@ -166,8 +166,12 @@ export const updateProfile = async (
 
   const Profile = z.object({
     cover: z.string().optional(),
-    name: z.string().max(60).optional(),
-    surname: z.string().max(60).optional(),
+
+    // TODO
+    // name: z.string().max(60).optional(),
+    // surname: z.string().max(60).optional(),
+    // username: z.string().max(3).optional(),
+
     description: z.string().max(255).optional(),
     city: z.string().max(60).optional(),
     school: z.string().max(60).optional(),
@@ -345,53 +349,6 @@ export const deletePost = async (postId: number) => {
 };
 
 // self
-export const getUserInfo = async () => {
-  const { userId } = auth();
-
-  if (!userId) throw new Error("User is not authenticated!");
-
-  try {
-    const userInfo = await prisma.user.findFirst({
-      where: {
-        id: userId,
-      },
-      include: {
-        _count: {
-          select: {
-            follower: true
-          }
-        }
-      }
-    });
-
-    return userInfo;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getUserInfoByUsername = async (username: string) => {
-  try {
-    const userInfo = await prisma.user.findFirst({
-      where: {
-        username,
-      },
-      include: {
-        _count: {
-          select: {
-            follower: true,
-            following: true,
-            posts: true
-          }
-        }
-      }
-    });
-
-    return userInfo;
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const getUserId = async () => {
   const { userId } = auth();

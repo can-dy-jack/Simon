@@ -5,6 +5,7 @@ import Image from "next/image";
 import { acceptFollowRequest, declineFollowRequest, getFollowReqs } from "@/lib/actions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FollowRequest, User } from "@prisma/client";
+import { userInfo } from "os";
 
 type Requests = FollowRequest & {
   sender: User;
@@ -18,11 +19,12 @@ const Friends = () => {
     });
   }, []);
 
-  const accept = () => {
-    // acceptFollowRequest
+  // TODO
+  const accept = (requestId: number, userId: string) => {
+    // acceptFollowRequest()
   }
 
-  const reject = () => {
+  const reject = (requestId: number, userId: string) => {
     // declineFollowRequest
   }
 
@@ -48,7 +50,7 @@ const Friends = () => {
               <span>{item.sender.username}</span>
             </div>
             <div className="flex gap-3 justify-end">
-              <form action={accept}>
+              <form action={() => accept(item.id, item.sender.id)}>
                 <button>
                   <Image
                     src="/check.svg"
@@ -59,7 +61,7 @@ const Friends = () => {
                   />
                 </button>
               </form>
-              <form action={reject}>
+              <form action={() => reject(item.id, item.sender.id)}>
                 <button>
                   <Image
                     src="/reject.svg"

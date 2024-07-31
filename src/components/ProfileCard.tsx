@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getUserInfo } from "@/lib/actions";
 import { useEffect, useMemo, useState } from "react";
 import type { UserInfo } from "../lib/types";
+
+import { getUserInfo } from "@/actions";
 
 const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState({} as UserInfo);
@@ -69,7 +70,7 @@ const ProfileCard = () => {
           </span>
         </div>
         <button className="bg-blue-500 text-white p-2 rounded-md text-xs">
-          <Link href="/profile/kartjim">我的主页</Link>
+          <Link href={`/profile/${username}`}>我的主页</Link>
         </button>
       </div>
     </div>

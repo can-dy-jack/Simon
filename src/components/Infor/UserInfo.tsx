@@ -7,6 +7,8 @@ import UserInforInteraction from "./UserInforInteraction";
 import { getUserId } from "@/lib/actions";
 import UpdateUser from "./UpdateUser";
 
+import { useTasks } from '@/context/config';
+
 const UserInfo = ({
   userInfo,
   username,
@@ -15,6 +17,13 @@ const UserInfo = ({
   username?: string;
 }) => {
   let [currentUserId, setCurrentUserId] = useState<null | string>(null);
+
+  const tasks = useTasks() as unknown as [];
+
+  useEffect(() => {
+    console.log(tasks);
+    console.log(222)
+  }, [tasks]);
 
   const formateDate = useCallback((date: Date | string | undefined) => {
     if (date) {
@@ -35,6 +44,14 @@ const UserInfo = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md text-sm card">
+      <div className="bg-blue-300">
+      {/* {tasks && tasks.map(task => (
+        <li key={task.id}>
+          {task.text}
+        </li>
+      ))} */}
+      </div>
+
       {/* <div className="flex items-center justify-between font-medium p-4 pb-0">
         <span className="text-gray-500">个人信息</span>
         <Link href="/" className="text-blue-500 text-xs">
@@ -42,16 +59,19 @@ const UserInfo = ({
         </Link>
       </div> */}
       <div className="flex flex-col gap-4 text-gary-500">
-        <div className="flex items-center gap-2 p-4 pb-0">
-          <span className="text-xl text-black">{username}</span>
-          <span className="text-sm text-gray-400">@{username}</span>
-          {currentUserId && userInfo && userInfo.id == currentUserId ? (
-            <UpdateUser />
-          ) : (
-            <Link href="/" className="text-blue-500 text-xs more">
-              查看更多
-            </Link>
-          )}
+        <div className="p-4 pb-0">
+          <div className="flex items-center gap-2 flex-wrap w-[80%]">
+            <span className="text-xl text-black">{username}</span>
+            <span className="text-sm text-gray-400">@{username}</span>
+            {currentUserId && userInfo && userInfo.id == currentUserId ? (
+              <UpdateUser userInfo={userInfo} />
+            ) : (
+              // <Link href="/" className="text-blue-500 text-xs more">
+              //   查看更多
+                // </Link>
+                null
+            )}
+          </div>
         </div>
         {userInfo?.description && (
           <div
@@ -61,7 +81,7 @@ const UserInfo = ({
               __html: userInfo.description.replace(/\\n/g, "<br/>"),
             }}
           >
-            {}
+            { }
           </div>
         )}
       </div>
@@ -86,7 +106,7 @@ const UserInfo = ({
           <div className="flex items-center gap-2">
             <Image src="/city.svg" alt="" height={16} width={16} />
             <span>
-              公司：<b>{userInfo.work}</b>
+            工作：<b>{userInfo.work}</b>
             </span>
           </div>
         )}
