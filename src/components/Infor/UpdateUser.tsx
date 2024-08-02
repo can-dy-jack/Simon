@@ -5,13 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { updateProfile } from "@/lib/actions";
 import { UserButton } from "@clerk/nextjs";
-import { useTasksDispatch } from '@/context/config';
 
 const UpdateUser = ({ userInfo }: { userInfo: User }) => {
   const [isOpen, setOpen] = useState(false);
-
-  const dispatch = useTasksDispatch() as unknown as Function;
-
   const handleCancel = () => {
     setOpen(false);
   };
@@ -21,12 +17,6 @@ const UpdateUser = ({ userInfo }: { userInfo: User }) => {
       { success: true, error: false },
       { formData: form, cover: "" }
     ).then(res => {
-      dispatch && dispatch({
-        type: 'added',
-        id: 2,
-        text: '2333',
-      }); 
-      console.log(111)
     });
   };
 

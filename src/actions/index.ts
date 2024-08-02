@@ -63,3 +63,42 @@ export function switchFollow(userId: string) {
     .then((response) => response.json());
 }
 
+export function findFollowing(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "findFollowing", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({
+      userId
+    }),
+  })
+    .then((response) => response.json());
+}
+
+export function findFollowingReq(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "findFollowingReq", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({
+      userId
+    }),
+  })
+    .then((response) => response.json());
+}
+
+export function getMedia() {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "getMedia", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({}),
+  })
+    .then((response) => response.json());
+}

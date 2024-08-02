@@ -4,10 +4,8 @@ import { User } from "@prisma/client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./userinfo.css";
 import UserInforInteraction from "./UserInforInteraction";
-import { getUserId } from "@/lib/actions";
+import { getUserId } from "@/actions/special";
 import UpdateUser from "./UpdateUser";
-
-import { useTasks } from '@/context/config';
 
 const UserInfo = ({
   userInfo,
@@ -17,13 +15,6 @@ const UserInfo = ({
   username?: string;
 }) => {
   let [currentUserId, setCurrentUserId] = useState<null | string>(null);
-
-  const tasks = useTasks() as unknown as [];
-
-  useEffect(() => {
-    console.log(tasks);
-    console.log(222)
-  }, [tasks]);
 
   const formateDate = useCallback((date: Date | string | undefined) => {
     if (date) {
@@ -37,21 +28,13 @@ const UserInfo = ({
   }, []);
 
   useEffect(() => {
-    getUserId().then((res) => {
+    getUserId().then(res => {
       setCurrentUserId(res);
     });
   }, []);
 
   return (
     <div className="bg-white rounded-lg shadow-md text-sm card">
-      <div className="bg-blue-300">
-      {/* {tasks && tasks.map(task => (
-        <li key={task.id}>
-          {task.text}
-        </li>
-      ))} */}
-      </div>
-
       {/* <div className="flex items-center justify-between font-medium p-4 pb-0">
         <span className="text-gray-500">个人信息</span>
         <Link href="/" className="text-blue-500 text-xs">

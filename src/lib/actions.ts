@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import prisma from "./client";
+import prisma from "@/prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
@@ -346,57 +346,4 @@ export const deletePost = async (postId: number) => {
   } catch (err) {
     console.log(err);
   }
-};
-
-// self
-
-export const getUserId = async () => {
-  const { userId } = auth();
-  if (!userId) throw new Error("User is not authenticated!");
-  return userId;
-};
-
-export const findFollowing = async (userId: string) => {
-  const { userId: currentUserId } = auth();
-  if (!currentUserId) throw new Error("User is not authenticated!");
-
-  const res = await prisma.follower.findFirst({
-    where: {
-      followerId: userId,
-      followingId: currentUserId
-    }
-  })
-
-  return res;
-};
-
-export const findFollowingReq = async (userId: string) => {
-  const { userId: currentUserId } = auth();
-  if (!currentUserId) throw new Error("User is not authenticated!");
-
-  const res = await prisma.followRequest.findFirst({
-    where: {
-      senderId: userId,
-      receiverId: currentUserId
-    }
-  })
-
-  return res;
-};
-
-export const getMedia = async (userId: string) => {
-  const res = await prisma.post.findMany({
-    where: {
-      userId,
-      img: {
-        not: null,
-      }
-    },
-    take: 8,
-    orderBy: {
-      createAt: "desc"
-    }
-  })
-
-  return res;
 };

@@ -1,9 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import type { UserInfo } from "../lib/types";
-
+import { User } from "@prisma/client";
 import { getUserInfo } from "@/actions";
+
+type UserInfo = User & {
+  _count: {
+    follower: number;
+    following: number;
+    posts: number;
+  }
+}
 
 const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState({} as UserInfo);

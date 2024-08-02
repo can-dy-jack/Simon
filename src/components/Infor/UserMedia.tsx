@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Post, User } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { getMedia } from "@/lib/actions";
+import { getMedia } from "@/actions";
 import Load from "../partial/Load";
 
 const UserMedia = ({ userInfo }: { userInfo?: User }) => {
@@ -14,7 +14,7 @@ const UserMedia = ({ userInfo }: { userInfo?: User }) => {
       setTimeout(() => {
         setLoad(true);
       }, 0)
-      getMedia(userInfo.id).then(res => {
+      getMedia().then(res => {
         setMedia(res);
       }).finally(() => {
         setLoad(false);

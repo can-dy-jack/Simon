@@ -6,11 +6,16 @@ import Feed from "../../../components/Feed";
 import Image from "next/image";
 import { getUserInfoByUsername, findBlocked } from "@/actions";
 import { useEffect, useMemo, useState } from "react";
-import type { UserInfo } from "@/lib/types";
+import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
 
-
-import { TasksProvider } from '@/context/config';
+type UserInfo = User & {
+  _count: {
+    follower: number;
+    following: number;
+    posts: number;
+  }
+}
 
 const ProfilePage = ({ params }: { params: { username: string } }) => {
   const [isLoading, setLoad] = useState(true);
@@ -56,7 +61,6 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
   // if (isBlocked) return notFound();
 
   return (
-    <TasksProvider>
     <div className="flex gap-6 pt-6">
       <div className="hidden xl:block w-[20%]">
         <Sidebar type="profile" />
@@ -108,7 +112,6 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
         <Information userInfo={userInfo} username={username} />
       </div>
       </div>
-      </TasksProvider>
   );
 };
 

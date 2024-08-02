@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import prisma from "@/lib/client";
+import prisma from "@/prisma";
 
 // ngrok http http://localhost:3000 
 // clerk 配置

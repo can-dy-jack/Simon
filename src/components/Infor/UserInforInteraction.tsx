@@ -2,12 +2,8 @@
 
 import { switchBlock } from "@/lib/actions";
 import { useEffect, useOptimistic, useState } from "react";
-import {
-  findFollowing,
-  findFollowingReq,
-  switchFollow
-} from "@/lib/actions";
-import { findBlocked } from "@/actions";
+import { switchFollow } from "@/lib/actions";
+import { findBlocked, findFollowing, findFollowingReq } from "@/actions";
 
 import { User } from "@prisma/client";
 import Load from "../partial/Load";
@@ -28,7 +24,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isUserBlocked: res != null,
         }));
-        setLoad(pre => pre - 1);
+        setLoad((pre) => pre - 1);
       });
       findFollowing(userInfo?.id).then((res) => {
         // setIsFollowing(res != null);
@@ -36,7 +32,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isFollowing: res != null,
         }));
-        setLoad(pre => pre - 1);
+        setLoad((pre) => pre - 1);
       });
       findFollowingReq(userInfo?.id).then((res) => {
         // setIsFollowingSent(res != null);
@@ -44,7 +40,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           ...pre,
           isFollowingSent: res != null,
         }));
-        setLoad(pre => pre - 1);
+        setLoad((pre) => pre - 1);
       });
     }
   }, [userInfo]);
@@ -67,30 +63,31 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
   const follow = (form: FormData) => {
     if (userInfo && userInfo.id) {
       switchOptimisticState("follow"); // 立即切换状态 - 接口返回结果之后再判断有无问题
-      switchFollow(userInfo.id).then(res => {
-        setState(pre => ({
+      switchFollow(userInfo.id).then((res) => {
+        setState((pre) => ({
           ...pre,
           isFollowing: pre.isFollowing && false,
           isFollowingSent: !pre.isFollowing && !pre.isFollowingSent,
-        }))
-      });;
+        }));
+      });
     }
   };
 
   const block = () => {
     if (userInfo && userInfo.id) {
       switchOptimisticState("block");
-      switchBlock(userInfo.id).then(res => {
-        setState(pre => ({
+      switchBlock(userInfo.id).then((res) => {
+        setState((pre) => ({
           ...pre,
           isUserBlocked: !pre.isUserBlocked,
-        }))
+        }));
       });
     }
   };
 
-  return (
-    loading > 0 ? <Load /> :
+  return loading > 0 ? (
+    <Load />
+  ) : (
     <div className="flex p-4 bg-blue-50 items-center gap-4">
       <form action={follow} className="flex-1">
         {optimisticState.isFollowing ? (

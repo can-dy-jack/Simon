@@ -19,10 +19,10 @@ export async function POST(request: NextRequest) {
   }
   
   try {
-    const res = await prisma.block.findFirst({
+    const res = await prisma.follower.findFirst({
       where: {
-        blockerId: userId,
-        blockedId: currentUserId
+        followerId: userId,
+        followingId: currentUserId
       }
     })
 

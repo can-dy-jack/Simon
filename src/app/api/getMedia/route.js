@@ -11,29 +11,22 @@ export async function POST(request) {
       return Response.json({ error: "Not authenticated" });
     }
   }
-
-  const username = body.username;
-  if (!username) {
-    return Response.json({ error: "no username!" });
-  }
-
+  
   try {
-    const userInfo = await prisma.user.findFirst({
+    const res = await prisma.post.findMany({
       where: {
-        username,
-      },
-      include: {
-        _count: {
-          select: {
-            follower: true,
-            following: true,
-            posts: true
-          }
+        userId,
+        img: {
+          not: null,
         }
+      },
+      take: 8,
+      orderBy: {
+        createAt: "desc"
       }
-    });
+    })
 
-    return Response.json(userInfo)
+    return Response.json(res)
   } catch (err) {
     console.log(err);
     return Response.json({ error: err });

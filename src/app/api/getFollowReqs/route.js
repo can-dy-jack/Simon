@@ -1,4 +1,4 @@
-import prisma from "@/lib/client";
+import prisma from "@/prisma";
 import { getAuth } from "@clerk/nextjs/server";
 
 export async function POST(request) {

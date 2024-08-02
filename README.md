@@ -25,6 +25,7 @@ WEBHOOK_SECRET=
 - 好友申请 - 同意/拒绝
 - 用户信息更新 - cover图片功能
 - actions改为api
+  - 接口获取的信息加密
 
 ### 计划
 - clerk 生产环境

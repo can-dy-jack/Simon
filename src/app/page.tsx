@@ -10,10 +10,6 @@ import { useUser } from "@clerk/nextjs";
 const Homepage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
 
-  // console.log(
-  //   23333, user
-  // )
-
   return (
     <div className='flex gap-6 pt-6'>
       <div className="hidden xl:block w-[20%]">
