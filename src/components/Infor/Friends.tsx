@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { acceptFollowRequest, declineFollowRequest } from "@/lib/actions";
-import { getFollowReqs } from "@/actions";
+import { getFollowReqs, acceptFollowRequest, declineFollowRequest } from "@/actions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FollowRequest, User } from "@prisma/client";
 
@@ -21,11 +20,13 @@ const Friends = () => {
 
   // TODO
   const accept = (requestId: number, userId: string) => {
-    // acceptFollowRequest()
+    acceptFollowRequest(userId).then(res => { })
+    // useOptimistic
+    // update
   }
 
   const reject = (requestId: number, userId: string) => {
-    // declineFollowRequest
+    declineFollowRequest(userId).then(res => { })
   }
 
   return requests.length === 0 ? null : (

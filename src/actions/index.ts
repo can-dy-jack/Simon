@@ -102,3 +102,27 @@ export function getMedia() {
   })
     .then((response) => response.json());
 }
+
+export function acceptFollowRequest(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "acceptFollowRequest", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ userId }),
+  })
+    .then((response) => response.json());
+}
+
+export function declineFollowRequest(userId: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "declineFollowRequest", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ userId }),
+  })
+    .then((response) => response.json());
+}
