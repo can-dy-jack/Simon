@@ -23,10 +23,7 @@ WEBHOOK_SECRET=
 - middleware.ts文件位置导致的报错？
 - usecontext
   - [x] 更新用户信息刷新
-- 好友申请 - 同意/拒绝
 - 用户信息更新 - cover图片功能
 - actions改为api
   - 接口获取的信息加密
-
-### 计划
-- clerk 生产环境
+- [x] clerk 生产环境

@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { getFollowReqs, acceptFollowRequest, declineFollowRequest } from "@/actions";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  getFollowReqs,
+  acceptFollowRequest,
+  declineFollowRequest,
+} from "@/actions";
+import { useEffect, useOptimistic, useState } from "react";
 import { FollowRequest, User } from "@prisma/client";
 
 type Requests = FollowRequest & {
@@ -12,22 +16,33 @@ type Requests = FollowRequest & {
 
 const Friends = () => {
   let [requests, setRequests] = useState<Requests[]>([]);
+
   useEffect(() => {
     getFollowReqs().then((res) => {
       if (res) setRequests(res);
     });
   }, []);
 
-  // TODO
+  // useOptimistic 有bug？
   const accept = (requestId: number, userId: string) => {
-    acceptFollowRequest(userId).then(res => { })
-    // useOptimistic
-    // update
-  }
+    setRequests((prev) => prev.filter((req) => req.id !== requestId));
+
+    acceptFollowRequest(userId).then((_) => {
+      // setRequests((prev) => prev.filter((req) => req.id !== requestId));
+    }).catch(e => {
+      alert("操作失败！") // TODO 
+    });
+  };
 
   const reject = (requestId: number, userId: string) => {
-    declineFollowRequest(userId).then(res => { })
-  }
+    setRequests((prev) => prev.filter((req) => req.id !== requestId));
+
+    declineFollowRequest(userId).then((_) => {
+      // setRequests((prev) => prev.filter((req) => req.id !== requestId));
+    }).catch(e => {
+      alert("操作失败！") // TODO
+    });
+  };
 
   return requests.length === 0 ? null : (
     <div className="p-4 bg-white rounded-lg shadow-md text-sm">
