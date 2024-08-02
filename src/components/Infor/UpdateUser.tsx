@@ -6,17 +6,25 @@ import { useState } from "react";
 import { updateProfile } from "@/lib/actions";
 import { UserButton } from "@clerk/nextjs";
 
+import { useUpdateDispatch } from "@/context/update";
+
 const UpdateUser = ({ userInfo }: { userInfo: User }) => {
   const [isOpen, setOpen] = useState(false);
   const handleCancel = () => {
     setOpen(false);
   };
 
+  const dispatch = useUpdateDispatch() as unknown as Function;
+
   const Update = (form: FormData) => {
     updateProfile(
       { success: true, error: false },
       { formData: form, cover: "" }
     ).then(res => {
+      dispatch({
+        type: 'update'
+      });
+      setOpen(false);
     });
   };
 

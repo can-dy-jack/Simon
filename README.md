@@ -21,7 +21,8 @@ WEBHOOK_SECRET=
 
 ### 进度
 - middleware.ts文件位置导致的报错？
-- usecontext - 全局刷新
+- usecontext
+  - [x] 更新用户信息刷新
 - 好友申请 - 同意/拒绝
 - 用户信息更新 - cover图片功能
 - actions改为api
