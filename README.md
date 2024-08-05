@@ -3,8 +3,9 @@
 
 - 用户管理: [clerk](https://clerk.com/)
 - 数据库: prisma + hostings
+- 图片: [cloudinary](https://cloudinary.com/)
 
-<!-- --registry=https://registry.npmmirror.com -->
+<!-- npm 镜像 --registry=https://registry.npmmirror.com -->
 
 ### 环境变量
 ```env
@@ -20,10 +21,8 @@ WEBHOOK_SECRET=
 ```
 
 ### 进度
-- middleware.ts文件位置导致的报错？
+- [x] middleware.ts文件位置导致的报错？
 - usecontext
-  - [x] 更新用户信息刷新
-- 用户信息更新 - cover图片功能
-- actions改为api
-  - 接口获取的信息加密
+  - [x] 更新用户信息刷新 - 使用router.refresh()替代
+- [x] 用户信息更新 - cover图片功能
 - [x] clerk 生产环境

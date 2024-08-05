@@ -1,4 +1,4 @@
-import { addPost } from "@/lib/actions";
+import { addPost } from "@/actions/special";
 // import { auth } from "@clerk/nextjs/server";
 // import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
