@@ -23,7 +23,7 @@ const Friends = () => {
     });
   }, []);
 
-  // useOptimistic 有bug？
+  // useOptimistic 有bug？ -- 要加 async 和 try catch ？
   const accept = (requestId: number, userId: string) => {
     setRequests((prev) => prev.filter((req) => req.id !== requestId));
 

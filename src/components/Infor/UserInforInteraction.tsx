@@ -95,8 +95,7 @@ const UserInforInteraction = ({ userInfo }: { userInfo?: User }) => {
           </button>
         ) : optimisticState.isFollowingSent ? (
           <button className="bg-gray-500/[0.1] border border-gray-500 text-gray-500 text-sm rounded-md p-2 w-full hover:bg-gray-500/[0.2] active:bg-gray-500/[0.1]">
-            取消关注
-            {/* 好友请求已发送 */}
+            好友请求已发送
           </button>
         ) : (
           <button className="bg-blue-500 text-white text-sm rounded-md p-2 w-full hover:bg-blue-400 active:bg-blue-500">

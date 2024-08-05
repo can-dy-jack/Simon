@@ -9,6 +9,7 @@ import { UserButton } from "@clerk/nextjs";
 // import { useUpdateDispatch } from "@/context/update";
 import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
+import UpdateButton from "./UpdateButton";
 
 const inputStyle =
   "ring-1 ring-gary-300 py-2 px-3 rounded-md text-sm focus:shadow-[0_0_0_3px_#4bb1e744] focus:outline-none transition-shadow";
@@ -196,12 +197,7 @@ const UpdateUser = ({ userInfo }: { userInfo: User }) => {
                 <span className="text-green-400">更新成功！</span>
               )}
               {state.error && <span className="text-red-500">更新失败！</span>}
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-md cursor-pointer m-2 border hover:shadow-[0_0_0_3px_#eef] transition-shadow"
-              >
-                更新
-              </button>
+              <UpdateButton />
               <button
                 type="button"
                 onClick={handleCancel}

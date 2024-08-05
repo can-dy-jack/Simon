@@ -32,7 +32,7 @@ const Page = ({ type = "home" }: { type?: "home" | "profile" }) => {
           ))
         }
       </div>
-      <Ad size="sm" />
+      {/* <Ad size="sm" /> */}
     </div>
   );
 };

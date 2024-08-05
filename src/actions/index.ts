@@ -126,3 +126,41 @@ export function declineFollowRequest(userId: string) {
   })
     .then((response) => response.json());
 }
+
+export function getPosts(username: string) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "getPosts", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ username }),
+  })
+    .then((response) => response.json());
+}
+
+export function switchLike(postId: number) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "switchLike", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ postId }),
+  })
+    .then((response) => response.json());
+}
+
+export function getComments(postId: number) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  return fetch(baseURL + "getComments", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ postId }),
+  })
+    .then((response) => response.json());
+}
+
+

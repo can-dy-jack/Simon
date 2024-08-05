@@ -24,7 +24,7 @@ const Information = ({ userInfo, username }: {userInfo?: User, username: string}
       }
       <Friends />
       <Birthdays />
-      <Ad size="md" />
+      {/* <Ad size="md" /> */}
     </div>
   )
 }

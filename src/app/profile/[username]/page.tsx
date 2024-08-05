@@ -8,7 +8,7 @@ import { getUserInfoByUsername, findBlocked } from "@/actions";
 import { useEffect, useMemo, useState } from "react";
 import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
-import { useUpdate } from "@/context/update";
+// import { useUpdate } from "@/context/update";
 
 type UserInfo = User & {
   _count: {
@@ -23,7 +23,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
   const [userInfo, setUserInfo] = useState({} as UserInfo);
   const [isBlocked, setIsBlocked] = useState(false);
 
-  const updateCount = useUpdate();
+  // const updateCount = useUpdate();
 
   useEffect(() => {
     getUserInfoByUsername(params.username).then((res) => {
@@ -36,7 +36,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
         })
       }
     });
-  }, [params, updateCount]);
+  }, [params]);
 
   const username = useMemo(() => {
     if (!userInfo) return "";
@@ -108,7 +108,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
               </div>
             </div>
           </div>
-          <Feed />
+          <Feed username={username} />
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">

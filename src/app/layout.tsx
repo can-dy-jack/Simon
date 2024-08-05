@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { UpdateProvider } from "@/context/update";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Simon, social media app",
@@ -21,7 +21,8 @@ export default function RootLayout({
     <UpdateProvider>
       <ClerkProvider>
         <html lang="zh-CN">
-          <body className={inter.className}>
+          {/*  className={inter.className} */}
+          <body>
             <div className="w-full bg-white px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
               <NavBar />
             </div>
