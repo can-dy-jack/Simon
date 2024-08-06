@@ -20,9 +20,9 @@ const Homepage = () => {
           <div className="text-slate-600">{user ? "欢迎您，" + user.username : ""}</div>
         </div>
         <div className="flex flex-col gap-6">
-          <Stories />
+          <Stories userId={user?.id || ""} />
           <AddPost />
-          <Feed username="" />
+          <Feed username="" currentUserId={user?.id || ""} />
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">

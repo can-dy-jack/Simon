@@ -148,6 +148,7 @@ export const updateProfile = async (
   }
 };
 
+// TODO
 export const addComment = async (postId: number, desc: string) => {
   const { userId } = auth();
 
@@ -172,6 +173,7 @@ export const addComment = async (postId: number, desc: string) => {
   }
 };
 
+// TODO
 export const addPost = async (formData: FormData, img: string) => {
   const desc = formData.get("desc") as string;
 
@@ -203,6 +205,7 @@ export const addPost = async (formData: FormData, img: string) => {
   }
 };
 
+// TODO
 export const addStory = async (img: string) => {
   const { userId } = auth();
 

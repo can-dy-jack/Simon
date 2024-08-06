@@ -163,4 +163,14 @@ export function getComments(postId: number) {
     .then((response) => response.json());
 }
 
+export function getStories() {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
+  return fetch(baseURL + "getStories", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ }),
+  })
+    .then((response) => response.json());
+}

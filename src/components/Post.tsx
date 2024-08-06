@@ -2,6 +2,7 @@ import Image from "next/image";
 import Comments from "./Comments";
 import { Post as PrismaPost, User } from "@prisma/client";
 import PostInter from "./PostInter";
+import PostActions from "./PostActions";
 
 type FeedPostType = PrismaPost & {
   user: User;
@@ -13,7 +14,7 @@ type FeedPostType = PrismaPost & {
   };
 };
 
-const Post = ({ post }: { post: FeedPostType }) => {
+const Post = ({ post, currentUserId }: { post: FeedPostType, currentUserId: string }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -27,7 +28,11 @@ const Post = ({ post }: { post: FeedPostType }) => {
           />
           <span className="font-medium">{post.user.username || "佚名"}</span>
         </div>
-        <Image src="/more.png" alt="avatar" height={16} width={16} />
+        {
+          currentUserId == post.user.id ? (
+            <PostActions postId={post.id} />
+          ) : ""
+        }
       </div>
       <div className="flex flex-col gap-4">
         {post.img && (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "./Post";
 import { getPosts } from "@/actions";
 
-const Feed = ({ username }: { username?: string }) => {
+const Feed = ({ username, currentUserId }: { username?: string, currentUserId: string }) => {
   const [posts, setPosts] = useState<any[]>([]);
   
   useEffect(() => {
@@ -15,7 +15,7 @@ const Feed = ({ username }: { username?: string }) => {
     <div className="p-4 bg-white shadow-md rounded-lg flex flex-col gap-12">
       {
         posts.length ? posts.map(post => (
-          <Post key={post.id} post={post} />
+          <Post key={post.id} post={post} currentUserId={currentUserId} />
         )) : "暂无数据"
       }
     </div>

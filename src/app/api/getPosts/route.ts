@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       const posts = await prisma.post.findMany({
         where: {
           userId: {
-            in: followingIds
+            in: [currentUserId, ...followingIds]
           }
         },
         include: {
