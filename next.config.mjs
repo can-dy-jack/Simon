@@ -33,6 +33,27 @@ const nextConfig = {
     DATABASE_URL: process.env.DATABASE_URL,
     WEBHOOK_SECRET: process.env.WEBHOOK_SECRET,
   },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: ["https://kartjim.cn", "http://localhost:3000"], // Set your origin
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
