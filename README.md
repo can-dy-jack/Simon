@@ -11,13 +11,14 @@
 ```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
-
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-
 DATABASE_URL=
-
 WEBHOOK_SECRET=
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+API_BASE_URL=
 ```
 
 ### 进度
@@ -29,6 +30,7 @@ WEBHOOK_SECRET=
 - [ ] 创建/删除文章时 - 刷新！
   - `revalidatePath("/");`不起作用
 - api
-- 图片库
+- 图片展示库
 - 右侧广告 - buy me a coffee
 - 完善功能 - 上线正式
+- [ ] 引入第三方库优化样式
