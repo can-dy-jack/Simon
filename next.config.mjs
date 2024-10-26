@@ -40,7 +40,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://kartjim.cn,http://localhost:3000", // Set your origin
+            value: "*", // TODO Set your origin
           },
           {
             key: "Access-Control-Allow-Methods",
