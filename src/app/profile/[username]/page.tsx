@@ -108,7 +108,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
               </div>
             </div>
           </div>
-          <Feed username={username} />
+          <Feed username={username}  currentUserId={userInfo.id}/>
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">
