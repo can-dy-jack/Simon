@@ -1,5 +1,3 @@
-//
-
 import { type NextRequest } from 'next/server'
 
 export async function GET(
@@ -10,6 +8,7 @@ export async function GET(
     [key: string]: string;
   } = {
     "ruanyifeng": "https://www.ruanyifeng.com/blog/atom.xml",
+    "joshwcomeau": "https://www.joshwcomeau.com/rss.xml",
   };
 
   if (!types[params.type]) {
